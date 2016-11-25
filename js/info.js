@@ -38,7 +38,25 @@ var getParameters = function(name, lat, lng) {
 
 //exact necessary data from Yelp API
 function extactInfo(result) {
-  var business = result['businesses'][0];
-  var content = '<h2>'+business.name+'</h2><p>'+business.display_phone+'</p><p>Yelp Rating: '+business.rating+'</p>';
+  var business;
+  var content = "";
+  if(result.hasOwnProperty('businesses')) {
+    if(Array.isArray(result['businesses']) && result['businesses'].length>0) {
+      business = result['businesses'][0];
+    }
+  }
+  if(typeof business != 'undefined') {
+    if(business.hasOwnProperty('name')) {
+      content += '<h2>'+business.name+'</h2>';
+    }
+    if(business.hasOwnProperty('display_phone')) {
+      content += '<p>'+business.display_phone+'</p>';
+    }
+    if(business.hasOwnProperty('rating')) {
+      content += '<p>Yelp Rating: '+business.rating+'</p>';
+    }
+  } else {
+    content += '<h5>Yelp data is not availalbe now.</h5>';
+  }
   return content;
 }
