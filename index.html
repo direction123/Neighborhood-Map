@@ -17,6 +17,7 @@
       <li class="place-list-item" data-bind="text: name, click: $parent.showInfoWindow"></li>
     </ul>
   </div>
+  <div id="error"> </div>
 
   <script src="js/libs/knockout-3.4.1.js"></script>
   <script src="js/libs/jquery.min.js"></script>
@@ -29,7 +30,7 @@
   <script src="js/app.js"></script>
 
   <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAP0Q-6bDyAmcqF5NVdROdjgLeMa5KMk0I&v=3&callback=initMap">
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAP0Q-6bDyAmcqF5NVdROdjgLeMa5KMk0I&v=3&callback=initMap" onerror="googleMapError()">
   </script>
 </body>
 </html>

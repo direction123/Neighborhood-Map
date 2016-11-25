@@ -17,6 +17,10 @@ function initMap() {
   ko.applyBindings(new placeListModel());
 }
 
+function googleMapError() {
+  document.getElementById('error').innerHTML = "<h2>Google Maps is not loading.</h2>";
+}
+
 //view model
 var placeListModel = function () {
   var self = this;

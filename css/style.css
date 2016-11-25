@@ -36,6 +36,10 @@ input{
 .hamburger {
   display: none;
 }
+#error {
+  position: fixed;
+  top: 40px;
+}
 
 @media only screen and (max-width: 650px) {
   .hamburger {
