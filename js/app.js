@@ -45,11 +45,12 @@ var placeListModel = function () {
     var message = para[0];
     var parameterMap = para[1];
     $.ajax({
-      'url': message.action,
-      'data': parameterMap,
-      'cache': true,
-      'dataType': 'jsonp',
-      'success': function(data) {
+       url: message.action,
+       data: parameterMap,
+       cache: true,
+       dataType: 'jsonp',
+       timeout : 1000, //handle jsonp error
+       success: function(data) {
         var content = extactInfo(data);
         //add info window to marker
         google.maps.event.addListener(place_item.marker, 'click', function () {
@@ -59,8 +60,13 @@ var placeListModel = function () {
           infoWindow.setContent(content);
         });
       },
-      'error': function (e) {
-        document.getElementById("error").innerHTML = "<h4>Yelp data is not availalbe now.</h4>";
+       error: function (e) {
+        google.maps.event.addListener(place_item.marker, 'click', function () {
+          infoWindow.open(map, this);
+          place_item.marker.setAnimation(google.maps.Animation.BOUNCE);
+          setTimeout(function(){ place_item.marker.setAnimation(null); }, 750);
+          infoWindow.setContent("<h5>Yelp data is not availalbe now.</h5>");
+        });
       }
     });
       
