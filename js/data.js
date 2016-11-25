@@ -1,5 +1,5 @@
 //raw data
-var raw_place_list = [
+var rawPlaceList = [
   {
     name: "The John McKay Center",
     lat: 34.019718,

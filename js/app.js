@@ -21,27 +21,27 @@ function initMap() {
 var placeListModel = function () {
   var self = this;
   //input in the search bar
-  self.search_input= ko.observable("");
+  self.searchInput= ko.observable("");
   //initialize all places
-  self.place_list = ko.observableArray([]);
-     raw_place_list.forEach(function (place_item) {
-       self.place_list.push(new place(place_item));
+  self.placeList = ko.observableArray([]);
+     rawPlaceList.forEach(function (placeItem) {
+       self.placeList.push(new place(placeItem));
   });
 
   //add google map related properties to places
   var marker;
   var infoWindow;
-  self.place_list().forEach(function (place_item) {
+  self.placeList().forEach(function (placeItem) {
     marker = new google.maps.Marker({
-      position: new google.maps.LatLng(Number(place_item.lat), Number(place_item.lng)),
+      position: new google.maps.LatLng(Number(placeItem.lat), Number(placeItem.lng)),
       map: map,
       animation: google.maps.Animation.DROP
     });
     //add marker 
-    place_item.marker = marker;
+    placeItem.marker = marker;
 
     infoWindow = new google.maps.InfoWindow();
-    var para = getParameters(place_item.name, place_item.lat, place_item.lng);
+    var para = getParameters(placeItem.name, placeItem.lat, placeItem.lng);
     var message = para[0];
     var parameterMap = para[1];
     $.ajax({
@@ -53,18 +53,18 @@ var placeListModel = function () {
        success: function(data) {
         var content = extactInfo(data);
         //add info window to marker
-        google.maps.event.addListener(place_item.marker, 'click', function () {
+        google.maps.event.addListener(placeItem.marker, 'click', function () {
           infoWindow.open(map, this);
-          place_item.marker.setAnimation(google.maps.Animation.BOUNCE);
-          setTimeout(function(){ place_item.marker.setAnimation(null); }, 750);
+          placeItem.marker.setAnimation(google.maps.Animation.BOUNCE);
+          setTimeout(function(){ placeItem.marker.setAnimation(null); }, 700);
           infoWindow.setContent(content);
         });
       },
        error: function (e) {
-        google.maps.event.addListener(place_item.marker, 'click', function () {
+        google.maps.event.addListener(placeItem.marker, 'click', function () {
           infoWindow.open(map, this);
-          place_item.marker.setAnimation(google.maps.Animation.BOUNCE);
-          setTimeout(function(){ place_item.marker.setAnimation(null); }, 750);
+          placeItem.marker.setAnimation(google.maps.Animation.BOUNCE);
+          setTimeout(function(){ placeItem.marker.setAnimation(null); }, 750);
           infoWindow.setContent("<h5>Yelp data is not availalbe now.</h5>");
         });
       }
@@ -73,37 +73,37 @@ var placeListModel = function () {
   });
 
   //click event when clicking place name
-  self.show_info_window = function (place_item) {
-    google.maps.event.trigger(place_item.marker, 'click');
+  self.showInfoWindow = function (placeItem) {
+    google.maps.event.trigger(placeItem.marker, 'click');
   };
 
   //initialize all visible places
-  self.visible_place_list = ko.observableArray([]);
-  self.place_list().forEach(function (place_item) {
-    self.visible_place_list.push(place_item);
+  self.visiblePlaceList = ko.observableArray([]);
+  self.placeList().forEach(function (placeItem) {
+    self.visiblePlaceList.push(placeItem);
   });
   //filter places with input in the search bar
-  self.filter_places = function() {
+  self.filterPlaces = function() {
     //set all visible markers not visible
-    self.visible_place_list().forEach(function (place_item) {
-      place_item.marker.setVisible(false);
+    self.visiblePlaceList().forEach(function (placeItem) {
+      placeItem.marker.setVisible(false);
     });
     //remove all visible places
-    self.visible_place_list.removeAll();
+    self.visiblePlaceList.removeAll();
     //add current visible palces
-    var search_input = self.search_input().toLowerCase();
-    self.place_list().forEach(function (place_item) {
-      if (place_item.name.toLowerCase().indexOf(search_input) !== -1) { 
-        self.visible_place_list.push(place_item);
+    var searchInput = self.searchInput().toLowerCase();
+    self.placeList().forEach(function (placeItem) {
+      if (placeItem.name.toLowerCase().indexOf(searchInput) !== -1) { 
+        self.visiblePlaceList.push(placeItem);
       }
     });
-    self.visible_place_list().forEach(function (place_item) {
-      place_item.marker.setVisible(true);
+    self.visiblePlaceList().forEach(function (placeItem) {
+      placeItem.marker.setVisible(true);
     });
   };
 
   //mobile menu
-  self.show_place_list = function() {
+  self.showPlaceList = function() {
     $('.place-list').toggle();
   }
 };

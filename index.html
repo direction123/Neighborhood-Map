@@ -8,13 +8,13 @@
 </head>
 <body>
   <div id="map"> </div>
-  <div class="hamburger" data-bind="click:show_place_list">
+  <div class="hamburger" data-bind="click:showPlaceList">
     <img class="hamburger-img" src="img/ham.png"></img>
   </div>
   <div class="place-list"> 
-    <input type="text" placeholder="search by name" class="place-search" data-bind='value:search_input,  valueUpdate: "afterkeydown", event: {keyup: filter_places}'>
-    <ul class="place-list-items" data-bind="foreach: visible_place_list">
-      <li class="place-list-item" data-bind="text: name, click: $parent.show_info_window"></li>
+    <input type="text" placeholder="search by name" class="place-search" data-bind='value:searchInput,  valueUpdate: "afterkeydown", event: {keyup: filterPlaces}'>
+    <ul class="place-list-items" data-bind="foreach: visiblePlaceList">
+      <li class="place-list-item" data-bind="text: name, click: $parent.showInfoWindow"></li>
     </ul>
   </div>
 
