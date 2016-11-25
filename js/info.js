@@ -1,4 +1,5 @@
-//auth parameters for Yelp API
+//generate auth parameters for Yelp API
+//Credit: https://gist.github.com/nathanhood/24771584f042d715e8f0
 var getParameters = function(name, lat, lng) {
   var auth = {
     consumerKey: "lbkfcnGIMeTlM7Px8FkCIA",
@@ -38,7 +39,6 @@ var getParameters = function(name, lat, lng) {
 //exact necessary data from Yelp API
 function extactInfo(result) {
   var business = result['businesses'][0];
-  console.log(business);
   var content = '<h2>'+business.name+'</h2><p>'+business.display_phone+'</p><p>Yelp Rating: '+business.rating+'</p>';
   return content;
 }
