@@ -1,7 +1,3 @@
-# Udacity Front-end Nanodegree - Project 
-
-https://www.udacity.com/course/front-end-web-developer-nanodegree--nd001?v=fe1
-
 ## Neighborhood Map
 
 ###  Functionality
@@ -12,4 +8,4 @@ https://www.udacity.com/course/front-end-web-developer-nanodegree--nd001?v=fe1
 * Clicking a location on the list displays unique information about the location, and animates its associated map marker
 * Yelp ratings show in the marker’s infoWindow.
 
-You can download the code, unzip it, then open index.html, or play it on github page: https://direction123.github.io/Udacity-Neighborhood-Map/
+You can download the code, unzip it, then open index.html, or play it on github page: https://direction123.github.io/Neighborhood-Map/
